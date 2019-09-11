@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/allison/.ssh'
+let g:netrw_dirhist_2='/home/allison/pico/.git/hooks'
+let g:netrw_dirhist_3='/home/allison/Downloads/programming_tools-master'
+let g:netrw_dirhist_4='/home/allison/pico/.git/hooks'
