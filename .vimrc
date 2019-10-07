@@ -93,6 +93,8 @@ set autowriteall
 " endif
 "
 let mapleader=","
+let g:CommandTFileScanner="find"
+let g:CommandTMaxFiles=500000
 
 " fix whitespace
 nnoremap <leader>fw :FixWhitespace<CR>
