@@ -30,7 +30,7 @@ Plugin 'terryma/vim-multiple-cursors'       " sublime-style multiple cursors
 " Git plugins not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'            " fast fuzzy filesearch
 " Local Git plugin repos
-Plugin 'file:///home/allison/.vim/plugin/vim-clipper'
+Plugin 'file:///home/allison/.vim/plugin/vim-clipper'   " sys clipboard access
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -86,33 +86,33 @@ if exists("&colorcolumn")
     hi ColorColumn ctermbg=black ctermfg=red
 endif
 
-set noexrc " don't use local version of .(g)vimrc, .exrc
+set noexrc                  " don't use local version of .(g)vimrc, .exrc
 set background=dark
 " set background=light
 set fenc=utf-8 " UTF-8
 set cpoptions=aABceFsmq
-set hls "highlighted search results"
-set backspace=indent,eol,start " make backspace a more flexible
+set hls                     " highlighted search results
+set backspace=indent,eol,start  " make backspace a more flexible
 "set backup " make backup files
 set fileformats=unix,dos,mac " support all three, in this order
-set hidden " you can change buffers without saving
-set iskeyword+=_,$,@,%,# " none of these are word dividers
-set noerrorbells " don't make noise
-set number " turn on line numbers
-set numberwidth=4 " We are good up to 9999 lines
-set scrolloff=25 " Keep n lines (top/bottom) for scope
-set showcmd " show the command being typed
-set ruler " Always show current positions along the bottom
-"set formatoptions=rq " Automatically insert comment leader on return, and
-set ignorecase " case insensitive by default
-set nowrap " do not wrap line
-set shiftwidth=4 " auto-indent amount when using cindent, >>, << and stuff like that
-set softtabstop=4 " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
-set expandtab " no real tabs please!
+set hidden                  " you can change buffers without saving
+set iskeyword+=_,$,@,%,#    " none of these are word dividers
+set noerrorbells            " don't make noise
+set number                  " turn on line numbers
+set numberwidth=4           " We are good up to 9999 lines
+set scrolloff=25            " Keep n lines (top/bottom) for scope
+set showcmd                 " show the command being typed
+set ruler                   " Always show current positions along the bottom
+"set formatoptions=rq       " Automatically insert comment leader on return
+set ignorecase              " case insensitive by default
+set nowrap                  " do not wrap line
+set shiftwidth=4            " auto-indent amount when using cindent, >>, <<, etc
+set softtabstop=4           " auto-indent amount when using tab or backspace
+set expandtab               " no real tabs please!
 set smarttab
-set wrap " wraps at window edge by default
-set linebreak " wraps at word breaks
-set mouse=n " enable scroll wheel in normal mode
+set wrap                    " wraps at window edge by default
+set linebreak               " wraps at word breaks
+set mouse=n                 " enable scroll wheel in normal mode
 
 " CommandT
 let g:CommandTFileScanner="find"
