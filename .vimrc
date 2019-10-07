@@ -9,35 +9,28 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-"
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+
+" plugins hosted on GitHub
+Plugin 'tpope/vim-fugitive'                 " git wrapper
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}  " sublime-style fast HTML tags
+Plugin 'ervandew/supertab'                  " smart TAB-completion
+Plugin 'tomtom/tcomment_vim'                " commenting
+Plugin 'ctrlpvim/ctrlp.vim'                 " fuzzy finder (file/buffer/mru/tag)
+Plugin 'scrooloose/nerdtree'                " interactive filetree explorer
+Plugin 'scrooloose/syntastic'               " awesome syntax checking
+Plugin 'ycm-core/YouCompleteMe'             " code completion
+Plugin 'mbbill/undotree'                    " undo history visualizer
+Plugin 'terryma/vim-multiple-cursors'       " sublime-style multiple cursors
+" Plugin 'tpope/vim-commentary'
+" Plugin 'kevinw/pyflakes-vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-Plugin 'file:///home/allison/.vim/plugin/vim-clipper'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
-Plugin 'ervandew/supertab'
-Plugin 'tomtom/tcomment_vim'
-" Plugin 'tpope/vim-commentary'
-" Plugin 'kevinw/pyflakes-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'YouCompleteMe', {'pinned': 1}
-Plugin 'mbbill/undotree'
-" sublime-style multiple cursors
-Plugin 'terryma/vim-multiple-cursors'
+" Git plugins not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'            " fast fuzzy filesearch
+" Local Git plugin repos
+Plugin 'file:///home/allison/.vim/plugin/vim-clipper'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -55,59 +48,52 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 "
-"
+
+let mapleader=","
+
 " Clipboard
+set undodir=~/.vim/undodir
 set clipboard=unnamed
 
 " line number
 set number
 
-
 " FB Vim config
 if filereadable($LOCAL_ADMIN_SCRIPTS . "/master.vimrc")
-  source $LOCAL_ADMIN_SCRIPTS/master.vimrc
-  source $LOCAL_ADMIN_SCRIPTS/vim/filetype.vim
-  source /home/engshare/admin/scripts/vim/biggrep.vim
-  " source $LOCAL_ADMIN_SCRIPTS/vim/fbvim.vim
+    source $LOCAL_ADMIN_SCRIPTS/master.vimrc
+    source $LOCAL_ADMIN_SCRIPTS/vim/filetype.vim
+    source /home/engshare/admin/scripts/vim/biggrep.vim
+    " source $LOCAL_ADMIN_SCRIPTS/vim/fbvim.vim
 endif
 
 set gdefault " global substitute by default
 set showmatch
 
 " command editing
-set showcmd	" display incomplete commands
+set showcmd	    " display incomplete commands
 set cmdwinheight=20 " big window for command history (q:, q/, q?)
 
-" read file if changed outside vim
-set autoread
-" backup and autosave
-set backupcopy=yes
+" filesystem
+set autoread        " read file if it changed outside Vim
+set backupcopy=yes  " backup and autosave
 set autowrite
 set autowriteall
-"
-" line length fascism
-" set textwidth=80
-" if exists("&colorcolumn")
-"   set colorcolumn=+1
-"   hi ColorColumn ctermbg=black ctermfg=red
-" endif
-"
-let mapleader=","
-let g:CommandTFileScanner="find"
-let g:CommandTMaxFiles=500000
 
-" fix whitespace
-nnoremap <leader>fw :FixWhitespace<CR>
+" line length fascism
+set textwidth=80
+if exists("&colorcolumn")
+    set colorcolumn=+1
+    hi ColorColumn ctermbg=black ctermfg=red
+endif
 
 set noexrc " don't use local version of .(g)vimrc, .exrc
-set background=dark " we plan to use a dark background
+set background=dark
 " set background=light
 set fenc=utf-8 " UTF-8
 set cpoptions=aABceFsmq
 set hls "highlighted search results"
 set backspace=indent,eol,start " make backspace a more flexible
 "set backup " make backup files
-set clipboard=unnamedplus " share windows clipboard
 set fileformats=unix,dos,mac " support all three, in this order
 set hidden " you can change buffers without saving
 set iskeyword+=_,$,@,%,# " none of these are word dividers
@@ -126,10 +112,14 @@ set expandtab " no real tabs please!
 set smarttab
 set wrap " wraps at window edge by default
 set linebreak " wraps at word breaks
-set mouse=a " enable scroll wheel
+set mouse=n " enable scroll wheel in normal mode
 
-" it2copy support
-vmap <leader>c <esc>:'<,'>:w !~/bin/it2copy<CR><CR>
+" CommandT
+let g:CommandTFileScanner="find"
+let g:CommandTMaxFiles=500000
+
+" Syntastic
+let g:syntastic_auto_loc_list = 1
 
 " youCompleteMe
 let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"
@@ -146,27 +136,6 @@ nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 let s:iterm   = exists('$ITERM_PROFILE') || exists('$ITERM_SESSION_ID') || filereadable(expand("~/.vim/.assume-iterm"))
 let s:screen  = &term =~ 'screen'
 let s:tmux    = exists('$TMUX')
-let s:xterm   = &term =~ 'xterm'
-
-if s:screen || s:xterm
-  function! s:BeginXTermPaste(ret)
-    set paste
-    return a:ret
-  endfunction
-
-  " enable bracketed paste mode on entering Vim
-  let &t_ti .= "\e[?2004h"
-
-  " disable bracketed paste mode on leaving Vim
-  let &t_te = "\e[?2004l" . &t_te
-
-  set pastetoggle=<Esc>[201~
-  inoremap <expr> <Esc>[200~ <SID>BeginXTermPaste("")
-  nnoremap <expr> <Esc>[200~ <SID>BeginXTermPaste("i")
-  vnoremap <expr> <Esc>[200~ <SID>BeginXTermPaste("c")
-  cnoremap <Esc>[200~ <nop>
-  cnoremap <Esc>[201~ <nop>
-endif
 
 " fixes highlight bg color w/ light bgs
 "hi Visual term=reverse cterm=reverse guibg=LightGrey
@@ -174,7 +143,7 @@ endif
 " undo-tree
 nnoremap <leader><C-r> :UndotreeToggle<cr>
 if has("persistent_undo")
-    set undodir=~/local/.undodir/
+    set undodir=~/.vim/undodir/
     set undofile
 endif
 
@@ -193,3 +162,11 @@ xnoremap p pgvy
 
 " fix indentations with F7
 map <F7> gg=G<C-o><C-o>
+" fix whitespace
+nnoremap <leader>fw :FixWhitespace<CR>
+
+" switch panes with CTRL + [vim directional key]
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
