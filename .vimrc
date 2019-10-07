@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'                 " git wrapper
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}  " sublime-style fast HTML tags
 Plugin 'ervandew/supertab'                  " smart TAB-completion
+Plugin 'SirVer/ultisnips'                   " snippet manager <3
 Plugin 'tomtom/tcomment_vim'                " commenting
 Plugin 'ctrlpvim/ctrlp.vim'                 " fuzzy finder (file/buffer/mru/tag)
 Plugin 'scrooloose/nerdtree'                " interactive filetree explorer
@@ -118,11 +119,31 @@ set mouse=n                 " enable scroll wheel in normal mode
 let g:CommandTFileScanner="find"
 let g:CommandTMaxFiles=500000
 
+" Supertab
+let g:SuperTabDefaultCompletionType = "<C-n>"
+
 " Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+nnoremap <leader>s: :SyntasticCheck
+nnoremap <leader>sn :lnext
+nnoremap <leader>sp :lprevious
+nnoremap <leader>sc :lclose
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<TAB>"
+let g:UltiSnipsJumpForwardTrigger="<TAB>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-TAB>"
 
 " youCompleteMe
-let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"
+" let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"
+let g:ycm_key_list_select_completion = ["<C-n>", "<Down>"]
+let g:ycm_key_list_previous_completion = ["<C-p>", "<Up>"]
 let g:ycm_autoclose_preview_window_after_insertion = 1 " this window is quite annoying
 let g:ycm_min_num_identifier_candidate_chars=4
 let g:ycm_error_symbol='x'
