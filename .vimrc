@@ -114,6 +114,9 @@ set smarttab
 set wrap                    " wraps at window edge by default
 set linebreak               " wraps at word breaks
 set mouse=n                 " enable scroll wheel in normal mode
+" statusline
+set laststatus=2
+set statusline=%f   " tail of the filename
 
 " CommandT
 let g:CommandTFileScanner="find"
@@ -130,13 +133,19 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-nnoremap <leader>s: :SyntasticCheck
-nnoremap <leader>sn :lnext
-nnoremap <leader>sp :lprevious
-nnoremap <leader>sc :lclose
+let g:syntastic_mode_map = { 
+    \ "mode": "passive",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": [] }
+nnoremap <leader>s :SyntasticCheck<CR>
+nnoremap <leader>sn :lnext<CR>
+nnoremap <leader>sp :lprevious<CR>
+nnoremap <leader>sc :lclose<CR>
+nnoremap <leader>sr :SyntasticReset<CR>
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<TAB>"
+let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsJumpForwardTrigger="<TAB>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-TAB>"
 
@@ -162,7 +171,7 @@ let s:tmux    = exists('$TMUX')
 "hi Visual term=reverse cterm=reverse guibg=LightGrey
 
 " undo-tree
-nnoremap <leader><C-r> :UndotreeToggle<cr>
+nnoremap <leader><C-r> :UndotreeToggle<CR>
 if has("persistent_undo")
     set undodir=~/.vim/undodir/
     set undofile
@@ -185,6 +194,11 @@ xnoremap p pgvy
 map <F7> gg=G<C-o><C-o>
 " fix whitespace
 nnoremap <leader>fw :FixWhitespace<CR>
+
+" pastetoggle with F2
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 " switch panes with CTRL + [vim directional key]
 map <C-j> <C-W>j
