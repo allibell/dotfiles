@@ -1,0 +1,46 @@
+
+# ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# added by allison 1/4/19 for vnc
+alias vnc='.~/development/VNC-Viewer-6.18.907-Linux-x64'
+
+# added by allison 1/12/19 for n (node.js)
+alias n='sudo .npm-global/bin/n'
+
+# added by allison 8/12/18 for clipper
+alias clip='nc -N localhost 8377'
+
+# added by allison 9/9/19 for irssi in tmux
+function irssi_in_tmux {
+    if { [ "$TERM" =  "screen-256color" ] && [ -n "$TMUX" ]; } then
+        # we're in a tmux session!  Explanation:
+        # screen-256color is my default terminal in .tmux.conf
+        # tmux sets the $TMUX var to proc info
+        
+        # if ! { tmux has-session -t irssi > /dev/null; } then
+        if ! (tmux ls | grep -q "irssi:"); then
+            tmux new -d -s irssi
+        fi
+
+        gnome-terminal -- bash -c "tmux attach -t irssi; bash" &
+
+    else
+        # if tmux has-session -t irssi > /dev/null; then
+        if ! (tmux ls | grep -q "irssi:"); then
+            tmux attach -t irssi
+        else
+            tmux new -s irssi
+        fi
+    fi
+}
+alias irssimux=irssi_in_tmux
+
+# added by allison 9/10/19 for dotfiles repo
+alias config='/usr/bin/git --git-dir=/home/allison/.cfg/ --work-tree=/home/allison'

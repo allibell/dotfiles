@@ -81,11 +81,15 @@ set autowrite
 set autowriteall
 
 " line length fascism
-set textwidth=80
-if exists("&colorcolumn")
-    set colorcolumn=+1
-    hi ColorColumn ctermbg=black ctermfg=red
-endif
+" set textwidth=80
+" if exists("&colorcolumn")
+"     set colorcolumn=+1
+"     hi ColorColumn ctermbg=black ctermfg=red
+" endif
+" 
+" line length SOFTCORE fascism
+set colorcolumn=81
+hi ColorColumn ctermbg=black ctermfg=red
 
 set noexrc                  " don't use local version of .(g)vimrc, .exrc
 set background=dark
@@ -106,13 +110,12 @@ set showcmd                 " show the command being typed
 set ruler                   " Always show current positions along the bottom
 "set formatoptions=rq       " Automatically insert comment leader on return
 set ignorecase              " case insensitive by default
-set nowrap                  " do not wrap line
 set shiftwidth=4            " auto-indent amount when using cindent, >>, <<, etc
 set softtabstop=4           " auto-indent amount when using tab or backspace
 set expandtab               " no real tabs please!
 set smarttab
 set wrap                    " wraps at window edge by default
-set linebreak               " wraps at word breaks
+set linebreak               " break long lines (visually)
 set mouse=n                 " enable scroll wheel in normal mode
 " statusline
 set laststatus=2
