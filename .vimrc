@@ -119,6 +119,7 @@ set smarttab
 set wrap                    " wraps at window edge by default
 set linebreak               " break long lines (visually)
 set mouse=n                 " enable scroll wheel in normal mode
+set noshowmode              " don't show mode below statusline (which shows mode)
 " statusline
 let g:airline#extensions#default#layout = [
     \ ['a', 'c'],
@@ -127,6 +128,11 @@ let g:airline#extensions#default#layout = [
 let g:airline_section_z = "\ %3p%%\ %3l:%-2c\ "     " percentage and line/col
 let g:airline_powerline_fonts = 1
 let g:airline_theme='luna'
+let g:airline_mode_map = {
+    \ "ic" : "INSERT",
+    \ "ix" : "INSERT",
+    \ }
+    
 
 " CommandT
 let g:CommandTFileScanner="find"
@@ -211,7 +217,6 @@ nnoremap <silent> <leader>l :nohl<CR>
 " pastetoggle with F2
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-set showmode
 
 " switch panes with CTRL + [vim directional key]
 map <C-j> <C-W>j
