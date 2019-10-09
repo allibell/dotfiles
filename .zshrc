@@ -123,5 +123,3 @@ export EDITOR="$VISUAL"
 
 # added by fzf installer 10/8/19
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-typeset POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=!?!?
