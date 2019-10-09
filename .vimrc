@@ -124,29 +124,9 @@ let g:airline#extensions#default#layout = [
     \ ['a', 'c'],
     \ ['z']
     \ ]
-let g:airline_section_z = "\ %3p%%\ %3l:%-2c\ " 
+let g:airline_section_z = "\ %3p%%\ %3l:%-2c\ "     " percentage and line/col
 let g:airline_powerline_fonts = 1
 let g:airline_theme='luna'
-
-" set laststatus=2
-" set statusline=
-" set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-" set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
-" set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ RPLACE\ ':''}
-" set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-" set statusline+=\ %n\ 		" buffer #
-" set statusline+=%#Visual#       " color
-" set statusline+=%{&paste?'\ PASTE\ ':''}
-" set statusline+=%{&spell?'\ SPELL\ ':''}
-" set statusline+=%#CursorIM#     " color
-" set statusline+=%#Cursor#  	" color
-" set statusline+=%#CursorLine# 	" color
-" set statusline+=%f   		" tail of the filename
-" set statusline+=%=
-" set statusline+=%#CursorIM#     " color
-" set statusline+=\ %3l:%-2c\   	" line + column
-" set statusline+=%#Cursor#       " color
-" set statusline+=\ %3p%%\      	" percentage
 
 " CommandT
 let g:CommandTFileScanner="find"
@@ -224,6 +204,9 @@ xnoremap p pgvy
 map <F7> gg=G<C-o><C-o>
 " fix whitespace
 nnoremap <leader>fw :FixWhitespace<CR>
+
+" quickly un-highlight search results
+nnoremap <silent> <leader>l :nohl<CR>
 
 " pastetoggle with F2
 nnoremap <F2> :set invpaste paste?<CR>
