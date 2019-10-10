@@ -1,8 +1,31 @@
+# my aliases!
 
 # ls aliases
-alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -lFh'       # size, show type, human readable
+alias la='ls -lAFh'     # long list, show almost all, show type, human readable
+alias lr='ls -tRFh'     # sorted by date, recursive, show type, human readable
+alias lt='ls -ltFh'     # long list, sorted by date, show type, human readable
+alias ll='ls -l'        # long list
+alias ldot='ls -ld .*'  # hidden files
+alias lS='ls -1FSsh'    # sorted by file size, show type, human readable
+alias lart='ls -1Fcart' # reverse order by ctime, show all
+alias lrt='ls -1Fcrt'   # reverse order by ctime
+
+alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
+
+alias grep='grep --color'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git} '
+
+# Command line head / tail shortcuts
+alias -g G='| grep'
+alias -g T='| tail'
+alias -g H='| head'
+alias -g NUL='> /dev/null 2>&1'
+alias -g LL='2>&1 | less'
+
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -44,3 +67,18 @@ alias irssimux=irssi_in_tmux
 
 # added by allison 9/10/19 for dotfiles repo
 alias config='/usr/bin/git --git-dir=/home/allison/.cfg/ --work-tree=/home/allison'
+
+# suffix aliases for filetype opens - run file program in background
+function background() {
+  "$@" &
+}
+
+BROWSER='google-chrome'
+XIVIEWER='eog'
+VIDVIEWER='vlc'
+PDFVIEWER='evince'
+alias -s {htm,html,de,org,net,com,at,cx,nl,se,dk}="background $BROWSER"
+alias -s {cpp,cxx,cc,c,hh,h,inl,asc,txt,TXT,tex}="background $EDITOR"
+alias -s {jpg,jpeg,png,gif,mng,tiff,tif,xpm}="background $XIVIEWER"
+alias -s {ape,avi,flv,m4a,mkv,mov,mp3,mpeg,mpg,ogg,ogm,rm,wav,webm}="background $VIDVIEWER"
+alias -s {pdf,PDF}="background $PDFVIEWER"
