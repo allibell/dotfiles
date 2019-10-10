@@ -7,9 +7,11 @@ source ~/.fonts/*.sh
 source ~/.zsh_aliases
 
 antigen use oh-my-zsh
-antigen bundle command-not-found
-antigen bundle common-aliases
 antigen bundle tmux
+antigen bundle git
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting
 # workaround for https://github.com/zsh-users/antigen/issues/675
 THEME=romkatv/powerlevel10k
 antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
@@ -26,12 +28,14 @@ case $- in
     *) return;;
 esac
 
+DISABLE_AUTO_TITLE=true
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
-shopt -s histappend
+setopt APPEND_HISTORY
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
@@ -39,7 +43,7 @@ HISTFILESIZE=2000
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-shopt -s globstar
+setopt dotglob
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
