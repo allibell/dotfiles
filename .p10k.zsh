@@ -86,6 +86,7 @@
   # change them.
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=  # no surrounding whitespace
+  typeset -g POWERLEVEL9K_LEFT_LEFT_WHITESPACE=' '              # left margin whitespace
   typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}  '  # separate left subsegments
   typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}  '  # separate right subsegments
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
