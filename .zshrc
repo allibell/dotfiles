@@ -28,6 +28,7 @@ case $- in
 esac
 
 DISABLE_AUTO_TITLE=true
+ENABLE_CORRECTION=true
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -50,6 +51,12 @@ setopt dotglob
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
+# zsh vi mode
+export VISUAL=vim
+export EDITOR="$VISUAL"
+# mimic some vim-keybinds in zsh vi mode
+bindkey -M viins "^?" backward-delete-char
+
 # added by Anaconda3 2018.12 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -66,7 +73,6 @@ else
 fi
 unset __conda_setup
 # <<< conda init <<<
-
 
 # added by allison 1/3/19 for android studio
 export PATH=$PATH:/usr/local/android-studio/bin
@@ -119,10 +125,6 @@ function extract {
         done
     fi
 }
-
-# added by allison 8/11/19 for VIM!
-export VISUAL=vim
-export EDITOR="$VISUAL"
 
 # added by fzf installer 10/8/19
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
