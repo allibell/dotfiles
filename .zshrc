@@ -1,8 +1,7 @@
 #################
 # Antigen
 #################
-source ~/antigen.zsh
-source ~/.theme
+source ~/.antigen.zsh
 source ~/.fonts/*.sh
 source ~/.zsh_aliases
 
@@ -127,3 +126,7 @@ export EDITOR="$VISUAL"
 
 # added by fzf installer 10/8/19
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Powerlevel10k theme customizations
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
