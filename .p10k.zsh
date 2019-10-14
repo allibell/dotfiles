@@ -34,7 +34,6 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
       # =========================[ Line #1 ]=========================
       dir                     # current directory
-      dir_writable            # current directory root-only?
       vcs                     # git status
       # =========================[ Line #2 ]=========================
       newline
@@ -259,6 +258,7 @@
 
   # Enable special styling for non-writable directories.
   typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE=true
+  typeset -g POWERLEVEL9K_DIR_NOT_WRITABLE_FOREGROUND='red'
   # Show this icon when the current directory is not writable. POWERLEVEL9K_DIR_SHOW_WRITABLE
   # above must be set to true for this parameter to have effect.
   # typeset -g POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
