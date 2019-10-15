@@ -140,7 +140,23 @@ hi DiffAdd guifg=NONE ctermfg=NONE guibg=#4acf55 ctermbg=002 gui=NONE cterm=NONE
 hi DiffChange guifg=NONE ctermfg=NONE guibg=#d3305e ctermbg=060 gui=NONE cterm=NONE
 hi DiffDelete guifg=NONE ctermfg=NONE guibg=#c92d2a ctermbg=010 gui=NONE cterm=NONE
 hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
-    
+
+
+" Clipper
+function! YankToClipboard(type, ...)
+    if a:0      " invoked from Visual mode, use '< and '> marks
+        exe "normal! `<" . a:type . "`>y"
+    elseif a:type == 'line'
+        exe "normal! '[V']y"
+    elseif a:type == 'block'
+        exe "normal! `[\<C-V>`]y"
+    else
+        exe "normal! `[v`]y"
+    endif
+    execute ':Clip'
+endfunction
+nnoremap <silent> <leader>y :set opfunc=YankToClipboard<CR>g@
+vnoremap <silent> <leader>y :<C-U>call YankToClipboard(visualmode(), 1)<CR>
 
 " CommandT
 let g:CommandTFileScanner="find"
