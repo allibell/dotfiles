@@ -21,6 +21,9 @@ antigen apply
 # Core
 #################
 
+# don't get hung up on control-flow sigs (e.g. CTRL+S)
+stty -ixon
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
