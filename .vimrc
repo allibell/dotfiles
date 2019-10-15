@@ -15,6 +15,7 @@ Plugin 'tpope/vim-fugitive'                 " git wrapper
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}  " sublime-style fast HTML tags
 Plugin 'ervandew/supertab'                  " smart TAB-completion
 Plugin 'SirVer/ultisnips'                   " snippet manager <3
+Plugin 'honza/vim-snippets'                 " snippets compilation
 Plugin 'tomtom/tcomment_vim'                " commenting
 Plugin 'ctrlpvim/ctrlp.vim'                 " fuzzy finder (file/buffer/mru/tag)
 Plugin 'scrooloose/nerdtree'                " interactive filetree explorer
@@ -185,9 +186,11 @@ nnoremap <leader>sr :SyntasticReset<CR>
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsListSnippets="<C-l>"
+let g:UltiSnipsListSnippets="<C-S>"
 let g:UltiSnipsJumpForwardTrigger="<TAB>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-TAB>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 " youCompleteMe
 " let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"

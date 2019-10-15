@@ -1,0 +1,75 @@
+priority 0
+
+#######################################################################
+#                          vim-snippets mods                          #
+#######################################################################
+
+# The below are all taken from the vim-snippets plugin, but formatted with 
+# same-line braces, which I prefer
+
+snippet main "main() (main)"
+int main(int argc, char *argv[]) {
+	${VISUAL}$0
+	return 0;
+}
+endsnippet
+
+snippet fun "function" b
+${1:void} ${2:function_name}($3) {
+	${VISUAL}$0
+}
+endsnippet
+
+global !p
+def split_line(text):
+	import textwrap
+	lines = textwrap.wrap(text, 78 - 19)
+	output = list()
+	for i, line in enumerate(lines):
+	    if i == 0:
+	        output.append('* Description: ' + ' '*5 + line)
+	    else:
+	        output.append('*' + ' '*19 + line)
+	snip_line = snip.tabstops[4].end[0]
+	snip.buffer.append(output, snip_line + 1)
+	del snip.buffer[snip_line]
+
+def get_args(arglist):
+	args = [arg.strip() for arg in arglist.split(',') if arg]
+	return args
+endglobal
+
+post_jump "if snip.tabstop == 0 : split_line(snip.tabstops[4].current_text)"
+snippet head "File Header" b
+/******************************************************************************
+* File:             `!p snip.rv = fn`
+*
+* Author:           ${2}  
+* Created:          `date +%m/%d/%y` 
+* Description:      ${4:${VISUAL}}
+*****************************************************************************/
+${0}
+endsnippet
+
+post_jump "if snip.tabstop == 0 : split_line(snip.tabstops[4].current_text)"
+snippet func "Function Header" 
+/******************************************************************************
+* Function:         $1
+* Description:      ${4:${VISUAL}}
+* Where:`!p 
+snip.rv = ""
+snip >> 2
+
+args = get_args(t[2])
+if args:
+	for arg in args:
+		snip.rv += '\n' + '*' + ' '*19 + arg + ' - TODO'
+snip << 2
+`
+* Return:           $5
+* Error:            $6
+*****************************************************************************/
+${1}($2){
+	${0}
+}
+endsnippet
