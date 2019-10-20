@@ -73,6 +73,7 @@ endif
 
 set gdefault " global substitute by default
 set showmatch
+syntax on
 
 " command editing
 set showcmd	    " display incomplete commands
