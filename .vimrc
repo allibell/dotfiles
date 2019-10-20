@@ -24,7 +24,7 @@ Plugin 'ycm-core/YouCompleteMe'             " code completion
 Plugin 'mbbill/undotree'                    " undo history visualizer
 Plugin 'terryma/vim-multiple-cursors'       " sublime-style multiple cursors
 Plugin 'vim-airline/vim-airline'          " sexy & configurable statusline
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline-themes'   " theme library for airline
 " Plugin 'tpope/vim-commentary'
 " Plugin 'kevinw/pyflakes-vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -35,13 +35,14 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'git://git.wincent.com/command-t.git'            " fast fuzzy filesearch
 " Local Git plugin repos
 Plugin 'file:///home/allison/.vim/plugin/vim-clipper'   " sys clipboard access
+Plugin 'file:///home/allison/.vim/plugin/jupytext.vim'  " edit ipynb files
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-"
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append ! to update or just :PluginUpdate
@@ -51,7 +52,7 @@ filetype plugin indent on    " required
 " "
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
-"
+
 
 let mapleader=","
 
