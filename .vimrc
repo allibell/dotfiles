@@ -144,6 +144,29 @@ hi DiffChange guifg=NONE ctermfg=NONE guibg=#d3305e ctermbg=060 gui=NONE cterm=N
 hi DiffDelete guifg=NONE ctermfg=NONE guibg=#c92d2a ctermbg=010 gui=NONE cterm=NONE
 hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
 
+" youCompleteMe
+" let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"
+let g:ycm_key_list_select_completion = ["<C-n>", "<Down>"]
+let g:ycm_key_list_previous_completion = ["<C-p>", "<Up>"]
+let g:ycm_autoclose_preview_window_after_completion = 1 " this window is quite annoying
+let g:ycm_key_list_stop_completion = ["<CR>"]
+let g:ycm_min_num_identifier_candidate_chars=4
+let g:ycm_error_symbol='x'
+let g:ycm_warning_symbol='!'
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "<C-n>"
+
+" ultisnips
+let g:UltiSnipsListSnippets="<C-S>"
+let g:UltiSnipsExpandTrigger="<TAB>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+
+" Jupytext
+let g:jupytext_fmt = "py"       " default is 'md'
 
 " Clipper
 function! YankToClipboard(type, ...)
@@ -165,9 +188,6 @@ vnoremap <silent> <leader>y :<C-U>call YankToClipboard(visualmode(), 1)<CR>
 let g:CommandTFileScanner="find"
 let g:CommandTMaxFiles=500000
 
-" Supertab
-let g:SuperTabDefaultCompletionType = "<C-n>"
-
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -186,22 +206,6 @@ nnoremap <leader>sp :lprevious<CR>
 nnoremap <leader>sc :lclose<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
 
-" ultisnips
-let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsListSnippets="<C-S>"
-let g:UltiSnipsJumpForwardTrigger="<TAB>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-TAB>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-
-" youCompleteMe
-" let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"
-let g:ycm_key_list_select_completion = ["<C-n>", "<Down>"]
-let g:ycm_key_list_previous_completion = ["<C-p>", "<Up>"]
-let g:ycm_autoclose_preview_window_after_insertion = 1 " this window is quite annoying
-let g:ycm_min_num_identifier_candidate_chars=4
-let g:ycm_error_symbol='x'
-let g:ycm_warning_symbol='!'
 " nnoremap <leader>y :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
