@@ -148,7 +148,7 @@ hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=re
 " let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"
 let g:ycm_key_list_select_completion = ["<C-n>", "<Down>"]
 let g:ycm_key_list_previous_completion = ["<C-p>", "<Up>"]
-let g:ycm_autoclose_preview_window_after_completion = 1 " this window is quite annoying
+let g:ycm_autoclose_preview_window_after_insertion = 1 " this window is quite annoying
 let g:ycm_key_list_stop_completion = ["<CR>"]
 let g:ycm_min_num_identifier_candidate_chars=4
 let g:ycm_error_symbol='x'
