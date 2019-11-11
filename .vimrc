@@ -185,6 +185,11 @@ endfunction
 nnoremap <silent> <leader>y :set opfunc=YankToClipboard<CR>g@
 vnoremap <silent> <leader>y :<C-U>call YankToClipboard(visualmode(), 1)<CR>
 
+
+" Open markdown files in Chrome
+autocmd BufEnter *.md exe 'noremap <F5> :!google-chrome %:p<CR>'
+
+
 " CommandT
 let g:CommandTFileScanner="find"
 let g:CommandTMaxFiles=500000
