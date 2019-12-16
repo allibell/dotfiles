@@ -1,0 +1,1 @@
+/home/allison/.vim/bundle/ultisnips/ftdetect/snippets.vim

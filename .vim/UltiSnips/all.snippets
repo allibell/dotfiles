@@ -1,0 +1,13 @@
+priority -55
+
+global !p
+from vimsnippets import foldmarker, make_box, get_comment_format
+endglobal
+
+snippet todo "TODO comment" bw
+`!p snip.rv=get_comment_format()[0]` TODO:${2:something} $0${3: <${4:`!v strftime('%d-%m-%y')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`
+endsnippet
+
+snippet hipsum "Hipsum - 50 Words" b
+Lorem ipsum dolor amet pop-up meh waistcoat, readymade lyft flannel bitters try-hard mumblecore yuccie thundercats master cleanse succulents 90's. Poke tilde schlitz, fingerstache kogi wayfarers four loko forage woke lumbersexual ramps. Celiac brooklyn four loko DIY forage intelligentsia kinfolk four loko poutine, mumblecore +1 microdosing bitters wolf activated charcoal artisan.
+endsnippet
