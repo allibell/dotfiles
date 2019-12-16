@@ -167,7 +167,7 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 " Jupytext
-let g:jupytext_fmt = "./py"       " default is 'md'
+let g:jupytext_fmt = "py"       " default is 'md'
 
 " Clipper
 function! YankToClipboard(type, ...)
