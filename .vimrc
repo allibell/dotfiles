@@ -154,6 +154,7 @@ let g:ycm_key_list_stop_completion = ["<CR>"]
 let g:ycm_min_num_identifier_candidate_chars=4
 let g:ycm_error_symbol='x'
 let g:ycm_warning_symbol='!'
+let g:ycm_filetype_blacklist = {}   " don't blacklist filetypes (esp. markdown)
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<C-n>"
