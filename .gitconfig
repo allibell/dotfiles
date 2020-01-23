@@ -1,0 +1,7 @@
+[user]
+    email = alibellows@gmail.com
+    name = Allison
+[credential]
+    helper = cache
+[pretty]
+    prettyshort = format:%C(auto,yellow)%h %C(auto,blue)%<(12,trunc)%ar %C(auto,green)%<(7,trunc)%aN %C(auto,reset)%s%C(auto,red)% gD% D
