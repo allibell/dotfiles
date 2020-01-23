@@ -23,8 +23,10 @@ Plugin 'scrooloose/syntastic'               " awesome syntax checking
 Plugin 'ycm-core/YouCompleteMe'             " code completion
 Plugin 'mbbill/undotree'                    " undo history visualizer
 Plugin 'terryma/vim-multiple-cursors'       " sublime-style multiple cursors
-Plugin 'vim-airline/vim-airline'          " sexy & configurable statusline
-Plugin 'vim-airline/vim-airline-themes'   " theme library for airline
+Plugin 'vim-airline/vim-airline'            " sexy & configurable statusline
+Plugin 'vim-airline/vim-airline-themes'     " theme library for airline
+Plugin 'allibell/vim-clipper'               " sys clipboard access
+Plugin 'goerz/jupytext.vim'                 " edit ipynb files
 " Plugin 'tpope/vim-commentary'
 " Plugin 'kevinw/pyflakes-vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -34,8 +36,6 @@ Plugin 'vim-airline/vim-airline-themes'   " theme library for airline
 " Git plugins not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'            " fast fuzzy filesearch
 " Local Git plugin repos
-Plugin 'file:///home/allison/.vim/plugin/vim-clipper'   " sys clipboard access
-Plugin 'file:///home/allison/.vim/plugin/jupytext.vim'  " edit ipynb files
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
