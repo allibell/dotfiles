@@ -86,8 +86,8 @@
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=  # no surrounding whitespace
   typeset -g POWERLEVEL9K_LEFT_LEFT_WHITESPACE=' '              # left margin whitespace
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}  '  # separate left subsegments
-  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}  '  # separate right subsegments
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{011}  '  # separate left subsegments
+  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{011}  '  # separate right subsegments
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
 
   # To disable default icons for all segments, set POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=''.
@@ -208,11 +208,11 @@
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
-  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER='%F{008} …'
+  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER='%F{011} …'
   # Color of the shortened directory segments.
   typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=011
   # Directory separator
-  typeset -g POWERLEVEL9K_DIR_PATH_SEPARATOR='%F{008}/'
+  typeset -g POWERLEVEL9K_DIR_PATH_SEPARATOR='%F{011}/'
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=43
@@ -420,9 +420,9 @@
 
   # These settings are used for respositories other than Git or when gitstatusd fails and
   # Powerlevel10k has to fall back to using vcs_info.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
+  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=77
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=77
+  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=185
   typeset -g POWERLEVEL9K_{CLEAN,MODIFIED,UNTRACKED}_BACKGROUND='clear'
 
   ##########################[ status: exit code of the last command ]###########################
