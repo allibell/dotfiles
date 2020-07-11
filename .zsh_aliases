@@ -12,6 +12,12 @@ alias lS='ls -1FSsh'    # sorted by file size, show type, human readable
 alias lart='ls -1Fcart' # reverse order by ctime, show all
 alias lrt='ls -1Fcrt'   # reverse order by ctime
 
+# list (short), human readable sizes
+function list_file_sizes() {
+    ls -lah "$@" | awk -F " " '{print $5 "\t" $9}'
+}
+alias lfs="list_file_sizes"
+
 # git aliases
 alias glo='git log --pretty=oneline --abbrev-commit'
 alias gls='git log --format=prettyshort'
@@ -23,6 +29,7 @@ alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
 alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git} '
+alias sgrepi='grep -i -R -n -H -C 5 --exclude-dir={.git} '
 
 # Command line head / tail shortcuts
 alias -g G='| grep'
@@ -72,7 +79,7 @@ function irssi_in_tmux {
 alias irssimux=irssi_in_tmux
 
 # added by allison 9/10/19 for dotfiles repo
-alias config='/usr/bin/git --git-dir=/home/allison/.cfg/ --work-tree=/home/allison'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # suffix aliases for filetype opens - run file program in background
 function background() {
