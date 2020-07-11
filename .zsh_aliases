@@ -65,7 +65,8 @@ alias vnc='.~/development/VNC-Viewer-6.18.907-Linux-x64'
 alias n='sudo .npm-global/bin/n'
 
 # added by allison 8/12/18 for clipper
-alias clip='nc -N localhost 8377'
+# alias clip='nc -N localhost 8377' # for Linux
+alias clip='nc localhost 8377'      # for OSX
 
 # added by allison 9/9/19 for irssi in tmux
 function irssi_in_tmux {
@@ -109,3 +110,6 @@ alias -s {cpp,cxx,cc,c,hh,h,inl,asc,txt,TXT,tex}="background $EDITOR"
 alias -s {jpg,jpeg,png,gif,mng,tiff,tif,xpm}="background $XIVIEWER"
 alias -s {ape,avi,flv,m4a,mkv,mov,mp3,mp4,mpeg,mpg,ogg,ogm,rm,wav,webm}="background $VIDVIEWER"
 alias -s {pdf,PDF}="background $PDFVIEWER"
+
+# eternal terminal with clipper support
+alias dev="et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377"
