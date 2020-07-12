@@ -2,7 +2,6 @@
 # Antigen
 #################
 source ~/.antigen.zsh
-source ~/.fonts/*.sh
 source ~/.zsh_aliases
 
 antigen use oh-my-zsh
@@ -54,43 +53,19 @@ setopt dotglob
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=0'
+
 # zsh vi mode
 export VISUAL=vim
 export EDITOR="$VISUAL"
 # mimic some vim-keybinds in zsh vi mode
 bindkey -M viins "^?" backward-delete-char
+bindkey -v
 
-# added by Anaconda3 2018.12 installer
-# >>> conda init >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/allison/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    \eval "$__conda_setup"
-else
-    if [ -f "/home/allison/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/allison/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate base
-    else
-        \export PATH="/home/allison/anaconda3/bin:$PATH"
-    fi
+# if we have a 'local' vim install, don't use the default
+if [ -h "$HOME/local/bin/vim" ]; then
+    alias vim="$HOME/local/bin/vim"
 fi
-unset __conda_setup
-# <<< conda init <<<
-
-# added by allison 1/3/19 for android studio
-export PATH=$PATH:/usr/local/android-studio/bin
-
-# added by allison 1/3/19 for flutter
-export PATH=$PATH:~/development/flutter/bin
-
-# added by allison 1/6/19 for vi keybindings in bash
-set -o vi
-
-# added by allison 2/28/19 for apache maven
-export PATH=$PATH:~/development/apache-maven-3.6.0/bin
-
-# added by allison 4/6/19 for mongo
-export PATH=$PATH:~/development/mongodb-linux-x86_64-ubuntu1804-4.0.8/bin
 
 # added by allison 5/24/19 for universal extraction
 function extract {
@@ -104,7 +79,7 @@ function extract {
         do
             if [ -f "$n" ] ; then
                 case "${n%,}" in
-                    *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar) 
+                    *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
                         tar xvf "$n"       ;;
                     *.lzma)      unlzma ./"$n"      ;;
                     *.bz2)       bunzip2 ./"$n"     ;;
@@ -135,3 +110,5 @@ function extract {
 # Powerlevel10k theme customizations
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+

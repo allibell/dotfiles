@@ -86,8 +86,8 @@
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=  # no surrounding whitespace
   typeset -g POWERLEVEL9K_LEFT_LEFT_WHITESPACE=' '              # left margin whitespace
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{011}  '  # separate left subsegments
-  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{011}  '  # separate right subsegments
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{111}  '  # separate left subsegments
+  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{111}  '  # separate right subsegments
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
 
   # To disable default icons for all segments, set POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=''.
@@ -203,19 +203,20 @@
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=011
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=111
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
-  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER='%F{011} …'
+  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER='%F{111} …'
   # Color of the shortened directory segments.
-  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=011
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=111
   # Directory separator
-  typeset -g POWERLEVEL9K_DIR_PATH_SEPARATOR='%F{011}/'
+  typeset -g POWERLEVEL9K_DIR_PATH_SEPARATOR='%F{111}/'
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=43
+  # typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=43
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=014
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
@@ -420,9 +421,9 @@
 
   # These settings are used for respositories other than Git or when gitstatusd fails and
   # Powerlevel10k has to fall back to using vcs_info.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=77
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=77
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=185
+  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=002
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=000
+  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=011
   typeset -g POWERLEVEL9K_{CLEAN,MODIFIED,UNTRACKED}_BACKGROUND='clear'
 
   ##########################[ status: exit code of the last command ]###########################
@@ -465,7 +466,7 @@
   # Show this many fractional digits. Zero means round to seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=229
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=000
   # # Duration format: 1d 2h 3m 4s.
   # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
@@ -807,3 +808,4 @@
 
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'
+
