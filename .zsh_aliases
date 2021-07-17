@@ -38,7 +38,7 @@ alias ff='find . -type f -name'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(echo $history[$HISTCMD] |sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # added by allison 1/4/19 for vnc
-alias vnc='.~/development/VNC-Viewer-6.18.907-Linux-x64'
+alias vnc='~/development/rpi/VNC-Viewer-6.20.529-Linux-x64'
 
 # added by allison 1/12/19 for n (node.js)
 alias n='sudo .npm-global/bin/n'
