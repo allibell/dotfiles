@@ -27,6 +27,8 @@ Plugin 'vim-airline/vim-airline'            " sexy & configurable statusline
 Plugin 'vim-airline/vim-airline-themes'     " theme library for airline
 Plugin 'allibell/vim-clipper'               " sys clipboard access
 Plugin 'goerz/jupytext.vim'                 " edit ipynb files
+Plugin 'cespare/vim-toml'
+Plugin 'dart-lang/dart-vim-plugin'
 " Plugin 'tpope/vim-commentary'
 " Plugin 'kevinw/pyflakes-vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -35,7 +37,9 @@ Plugin 'goerz/jupytext.vim'                 " edit ipynb files
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 " Git plugins not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'            " fast fuzzy filesearch
+Plugin 'git://github.com/digitaltoad/vim-pug.git'       " pug syntax highlighting
 " Local Git plugin repos
+" Plugin 'file:///home/allison/.vim/plugin/vim-toml'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
