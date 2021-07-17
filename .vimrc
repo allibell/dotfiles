@@ -29,7 +29,6 @@ Plugin 'wincent/vim-clipper'               " sys clipboard access
 Plugin 'goerz/jupytext.vim'                 " edit ipynb files
 Plugin 'cespare/vim-toml'
 Plugin 'dart-lang/dart-vim-plugin'
-Plugin 'wincent/command-t'            " fast fuzzy filesearch
 " Plugin 'tpope/vim-commentary'
 " Plugin 'kevinw/pyflakes-vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
