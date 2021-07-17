@@ -3,6 +3,8 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+" set runtime path to find fzf
+"set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -13,22 +15,21 @@ Plugin 'VundleVim/Vundle.vim'
 " plugins hosted on GitHub
 Plugin 'tpope/vim-fugitive'                 " git wrapper
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}  " sublime-style fast HTML tags
-Plugin 'ervandew/supertab'                  " smart TAB-completion
-Plugin 'SirVer/ultisnips'                   " snippet manager <3
+" Plugin 'ervandew/supertab'                  " smart TAB-completion
+" Plugin 'SirVer/ultisnips'                   " snippet manager <3
 Plugin 'honza/vim-snippets'                 " snippets compilation
 Plugin 'tomtom/tcomment_vim'                " commenting
-Plugin 'ctrlpvim/ctrlp.vim'                 " fuzzy finder (file/buffer/mru/tag)
 Plugin 'scrooloose/nerdtree'                " interactive filetree explorer
-Plugin 'scrooloose/syntastic'               " awesome syntax checking
-Plugin 'ycm-core/YouCompleteMe'             " code completion
+" Plugin 'ycm-core/YouCompleteMe'             " code completion
 Plugin 'mbbill/undotree'                    " undo history visualizer
 Plugin 'terryma/vim-multiple-cursors'       " sublime-style multiple cursors
 Plugin 'vim-airline/vim-airline'            " sexy & configurable statusline
-Plugin 'vim-airline/vim-airline-themes'     " theme library for airline
-Plugin 'allibell/vim-clipper'               " sys clipboard access
+Plugin 'allibell/vim-airline-themes'     " theme library for airline
+Plugin 'wincent/vim-clipper'               " sys clipboard access
 Plugin 'goerz/jupytext.vim'                 " edit ipynb files
 Plugin 'cespare/vim-toml'
 Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'wincent/command-t'            " fast fuzzy filesearch
 " Plugin 'tpope/vim-commentary'
 " Plugin 'kevinw/pyflakes-vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -67,13 +68,20 @@ set clipboard=unnamed
 " line number
 set number
 
+" enable truecoloring with iterm
+" set t_Co=256
+
 " FB Vim config
 if filereadable($LOCAL_ADMIN_SCRIPTS . "/master.vimrc")
     source $LOCAL_ADMIN_SCRIPTS/master.vimrc
     source $LOCAL_ADMIN_SCRIPTS/vim/filetype.vim
-    source /home/engshare/admin/scripts/vim/biggrep.vim
-    " source $LOCAL_ADMIN_SCRIPTS/vim/fbvim.vim
+    source $ADMIN_SCRIPTS/vim/biggrep.vim
+    source $LOCAL_ADMIN_SCRIPTS/vim/fbvim.vim
 endif
+
+" syntax highlighting for configerator
+au BufNewFile,BufRead *.cconf,*.cinc,*.thrift-cvalidator,TARGETS set filetype=python
+au BufNewFIle,BufRead *.thrift set filetype=python
 
 set gdefault " global substitute by default
 set showmatch
@@ -95,10 +103,14 @@ set autowriteall
 "     set colorcolumn=+1
 "     hi ColorColumn ctermbg=black ctermfg=red
 " endif
-" 
+"
 " line length SOFTCORE fascism
 set colorcolumn=81
-hi ColorColumn ctermbg=black ctermfg=red
+" hi ColorColumn ctermbg=black ctermfg=red
+hi ColorColumn ctermbg=None ctermfg=red
+
+" load my custom syntax highlighting
+runtime colors/pastel.vim
 
 set noexrc                  " don't use local version of .(g)vimrc, .exrc
 set background=dark
@@ -134,7 +146,7 @@ let g:airline#extensions#default#layout = [
     \ ]
 let g:airline_section_z = "\ %3p%%\ %3l:%-2c\ "     " percentage and line/col
 let g:airline_powerline_fonts = 1
-let g:airline_theme='luna'
+let g:airline_theme='deus'
 let g:airline_mode_map = {
     \ "ic" : "INSERT",
     \ "ix" : "INSERT",
@@ -144,32 +156,52 @@ let g:airline_mode_map = {
 " call s:h("diffAdded", {"fg": s:green })
 " call s:h("diffRemoved", { "fg": s:red })
 hi DiffAdd guifg=NONE ctermfg=NONE guibg=#4acf55 ctermbg=002 gui=NONE cterm=NONE
-hi DiffChange guifg=NONE ctermfg=NONE guibg=#d3305e ctermbg=060 gui=NONE cterm=NONE
-hi DiffDelete guifg=NONE ctermfg=NONE guibg=#c92d2a ctermbg=010 gui=NONE cterm=NONE
+hi DiffChange guifg=NONE ctermfg=NONE guibg=#d3305e ctermbg=005 gui=NONE cterm=NONE
+hi DiffDelete guifg=NONE ctermfg=NONE guibg=#c92d2a ctermbg=009 gui=NONE cterm=NONE
 hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
 
 " youCompleteMe
-" let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf="~/local/.ycm_extra_conf_fbcode.py"
+let g:ycm_confirm_extra_conf=0
+let g:ycm_key_detailed_diagnostics = '<leader>pd'
 let g:ycm_echo_current_diagnostic = 0
-let g:ycm_key_list_select_completion = ["<C-n>", "<Down>"]
-let g:ycm_key_list_previous_completion = ["<C-p>", "<Up>"]
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_autoclose_preview_window_after_insertion = 1 " this window is quite annoying
-let g:ycm_key_list_stop_completion = ["<CR>"]
 let g:ycm_min_num_identifier_candidate_chars=4
 let g:ycm_error_symbol='x'
 let g:ycm_warning_symbol='!'
 let g:ycm_filetype_blacklist = {}   " don't blacklist filetypes (esp. markdown)
 
 " Supertab
-let g:SuperTabDefaultCompletionType = "<C-n>"
+" let g:SuperTabDefaultCompletionType = "<C-n>"
 
-" ultisnips
-let g:UltiSnipsListSnippets="<C-S>"
-let g:UltiSnipsExpandTrigger="<TAB>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+" " ultisnips
+" function! g:UltiSnips_Complete()
+"     call UltiSnips#ExpandSnippet()
+"     if g:ulti_expand_res == 0
+"         if pumvisible()
+"             return "\<C-n>"
+"         else
+"             call UltiSnips#JumpForwards()
+"             if g:ulti_jump_forwards_res == 0
+"                return "\<TAB>"
+"             endif
+"         endif
+"     endif
+"     return ""
+" endfunction
+"
+" autocmd CmdwinEnter * inoremap <expr><buffer> <TAB>
+"     \ pumvisible() ? "\<C-n>" : "\<TAB>"
+" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+" let g:UltiSnipsJumpForwardTrigger="<c-u>"
+" let g:UltiSnipsListSnippets="<C-e>"
+" let g:UltiSnipsJumpBackwardTrigger = "<c-i>"
+" let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+" let g:snips_author="abellows"
+" let g:snips_email="abellows@fb.com"
 
 " Jupytext
 let g:jupytext_fmt = "py"       " default is 'md'
@@ -200,27 +232,27 @@ let g:CommandTFileScanner="find"
 let g:CommandTMaxFiles=500000
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 
-    \ "mode": "passive",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": [] }
-nnoremap <leader>s :SyntasticCheck<CR>
-nnoremap <leader>sn :lnext<CR>
-nnoremap <leader>sp :lprevious<CR>
-nnoremap <leader>sc :lclose<CR>
-nnoremap <leader>sr :SyntasticReset<CR>
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_mode_map = {
+"     \ "mode": "passive",
+"     \ "active_filetypes": [],
+"     \ "passive_filetypes": [] }
+" nnoremap <leader>s :SyntasticCheck<CR>
+" nnoremap <leader>sn :lnext<CR>
+" nnoremap <leader>sp :lprevious<CR>
+" nnoremap <leader>sc :lclose<CR>
+" nnoremap <leader>sr :SyntasticReset<CR>
 
-" nnoremap <leader>y :YcmForceCompileAndDiagnostics<CR>
-nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>cf :YcmForceCompileAndDiagnostics<CR>
+nnoremap <leader>cs :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>cd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>cl :YcmCompleter GoToDeclaration<CR>
 
 " terminal-specific magic
 let s:iterm   = exists('$ITERM_PROFILE') || exists('$ITERM_SESSION_ID') || filereadable(expand("~/.vim/.assume-iterm"))

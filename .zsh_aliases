@@ -12,6 +12,12 @@ alias lS='ls -1FSsh'    # sorted by file size, show type, human readable
 alias lart='ls -1Fcart' # reverse order by ctime, show all
 alias lrt='ls -1Fcrt'   # reverse order by ctime
 
+# list (short), human readable sizes
+function list_file_sizes() {
+    ls -lah "$@" | awk -F " " '{print $5 "\t" $9}'
+}
+alias lfs="list_file_sizes"
+
 # git aliases
 alias glo='git log --pretty=oneline --abbrev-commit'
 alias gls='git log --format=prettyshort'
@@ -23,6 +29,7 @@ alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
 alias grep='grep --color'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git} '
+alias sgrepi='grep -i -R -n -H -C 5 --exclude-dir={.git} '
 
 # Command line head / tail shortcuts
 alias -g G='| grep'
@@ -35,7 +42,21 @@ alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
 # Add an "alert" alias for long running commands.  Use like "sleep 10; alert"
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(echo $history[$HISTCMD] |sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(echo $history[$HISTCMD] |sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+function notify() {
+	$@
+	result=$?
+	osascript \
+	  -e "on run(argv)" \
+          -e "set text item delimiters to \" \"" \
+          -e "set Final to (argv as text)" \
+	  -e "return display notification Final with title \"Command Completed\"" \
+	  -e "end" \
+	  -- "$@"
+	return result
+}
+alias alertfire="~/.iterm2/it2attention fireworks"
+alias bell="echo -e '\a'"
 
 # added by allison 1/4/19 for vnc
 alias vnc='~/development/rpi/VNC-Viewer-6.20.529-Linux-x64'
@@ -44,7 +65,8 @@ alias vnc='~/development/rpi/VNC-Viewer-6.20.529-Linux-x64'
 alias n='sudo .npm-global/bin/n'
 
 # added by allison 8/12/18 for clipper
-alias clip='nc -N localhost 8377'
+# alias clip='nc -N localhost 8377' # for Linux
+alias clip='nc localhost 8377'      # for OSX
 
 # added by allison 9/9/19 for irssi in tmux
 function irssi_in_tmux {
@@ -72,7 +94,7 @@ function irssi_in_tmux {
 alias irssimux=irssi_in_tmux
 
 # added by allison 9/10/19 for dotfiles repo
-alias config='/usr/bin/git --git-dir=/home/allison/.cfg/ --work-tree=/home/allison'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # suffix aliases for filetype opens - run file program in background
 function background() {
@@ -88,3 +110,6 @@ alias -s {cpp,cxx,cc,c,hh,h,inl,asc,txt,TXT,tex}="background $EDITOR"
 alias -s {jpg,jpeg,png,gif,mng,tiff,tif,xpm}="background $XIVIEWER"
 alias -s {ape,avi,flv,m4a,mkv,mov,mp3,mp4,mpeg,mpg,ogg,ogm,rm,wav,webm}="background $VIDVIEWER"
 alias -s {pdf,PDF}="background $PDFVIEWER"
+
+# eternal terminal with clipper support
+alias dev="et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377"
