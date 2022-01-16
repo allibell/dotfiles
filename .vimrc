@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -27,8 +27,7 @@ Plugin 'vim-airline/vim-airline'            " sexy & configurable statusline
 Plugin 'allibell/vim-airline-themes'     " theme library for airline
 Plugin 'wincent/vim-clipper'               " sys clipboard access
 Plugin 'goerz/jupytext.vim'                 " edit ipynb files
-Plugin 'cespare/vim-toml'
-Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'wincent/command-t'            " fast fuzzy filesearch
 " Plugin 'tpope/vim-commentary'
 " Plugin 'kevinw/pyflakes-vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -36,10 +35,7 @@ Plugin 'dart-lang/dart-vim-plugin'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 " Git plugins not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'            " fast fuzzy filesearch
-Plugin 'git://github.com/digitaltoad/vim-pug.git'       " pug syntax highlighting
 " Local Git plugin repos
-" Plugin 'file:///home/allison/.vim/plugin/vim-toml'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

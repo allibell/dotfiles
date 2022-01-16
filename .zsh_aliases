@@ -1,4 +1,4 @@
-# my aliases!
+
 
 # ls aliases
 alias la='ls -A'
@@ -12,7 +12,7 @@ alias lS='ls -1FSsh'    # sorted by file size, show type, human readable
 alias lart='ls -1Fcart' # reverse order by ctime, show all
 alias lrt='ls -1Fcrt'   # reverse order by ctime
 
-# list (short), human readable sizes
+# list files with readable sizes
 function list_file_sizes() {
     ls -lah "$@" | awk -F " " '{print $5 "\t" $9}'
 }
@@ -25,14 +25,22 @@ alias gl='git log'
 alias gs='git status'
 alias gsh='git show'
 
+# hg aliases
+alias hgr='hg amend --rebase'
+alias hgup='arc pull && hg rebase -s $(hg show | head -n 1 | awk '\''{print $2}'\'') -d '\''remote/master'\'''
+alias fuckyea='hg amend --rebase && jf submit --draft --stack'
+
 alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
 alias grep='grep --color'
-alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git} '
-alias sgrepi='grep -i -R -n -H -C 5 --exclude-dir={.git} '
+alias sgrep='grep -n -C 5' 
+alias sgrepi='grep -i -n -C 5' 
+alias ssgrep='grep -R -n -H -C 5 --exclude-dir={.git} '
+alias ssgrepi='grep -i -R -n -H -C 5 --exclude-dir={.git} '
 
 # Command line head / tail shortcuts
 alias -g G='| grep'
+alias -g SG='| sgrep'
 alias -g T='| tail'
 alias -g H='| head'
 alias -g NUL='> /dev/null 2>&1'
@@ -41,32 +49,46 @@ alias -g LL='2>&1 | less'
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 
+# 'deja vu'  - search shell history
+function djv {
+    for n in $@
+    do
+        echo "trying $n"
+        sgrep "$n" ~/.zsh_history
+    done
+}
+function djvi {
+    for n in $@
+    do
+        echo "trying $n"
+        sgrepi "$n" ~/.zsh_history
+    done
+}
+
+# hgrep - search hg smartlog
+alias hgrep='hg ssl SG'
+# sl - fzf smartlog
+# function sl {
+#     hg ssl -T "{node | short} | {desc | firstline}\n" | \
+#     fzf --reverse --no-sort |\
+#     awk '{split($0,x,"|"); gsub(/ /, "", x[1]); print x[1]}' |\
+#     xargs hg up
+# }
+# function sl_branch {
+#     hg log -r 'reverse(_localbranch(.))' -T "{graphnode} | {node | short} | {desc | firstline}\n" | \
+#     fzf --reverse --no-sort |\
+#     awk '{split($0,x,"|"); gsub(/ /, "", x[2]); print x[2]}' |\
+#     xargs hg up
+# }
+
+
 # Add an "alert" alias for long running commands.  Use like "sleep 10; alert"
 # alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(echo $history[$HISTCMD] |sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-function notify() {
-	$@
-	result=$?
-	osascript \
-	  -e "on run(argv)" \
-          -e "set text item delimiters to \" \"" \
-          -e "set Final to (argv as text)" \
-	  -e "return display notification Final with title \"Command Completed\"" \
-	  -e "end" \
-	  -- "$@"
-	return result
-}
 alias alertfire="~/.iterm2/it2attention fireworks"
 alias bell="echo -e '\a'"
 
-# added by allison 1/4/19 for vnc
-alias vnc='~/development/rpi/VNC-Viewer-6.20.529-Linux-x64'
-
-# added by allison 1/12/19 for n (node.js)
-alias n='sudo .npm-global/bin/n'
-
 # added by allison 8/12/18 for clipper
-# alias clip='nc -N localhost 8377' # for Linux
-alias clip='nc localhost 8377'      # for OSX
+alias clip='nc localhost 8377'
 
 # added by allison 9/9/19 for irssi in tmux
 function irssi_in_tmux {
@@ -94,7 +116,7 @@ function irssi_in_tmux {
 alias irssimux=irssi_in_tmux
 
 # added by allison 9/10/19 for dotfiles repo
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=/home/allison/.cfg/ --work-tree=/home/allison'
 
 # suffix aliases for filetype opens - run file program in background
 function background() {
@@ -111,5 +133,86 @@ alias -s {jpg,jpeg,png,gif,mng,tiff,tif,xpm}="background $XIVIEWER"
 alias -s {ape,avi,flv,m4a,mkv,mov,mp3,mp4,mpeg,mpg,ogg,ogm,rm,wav,webm}="background $VIDVIEWER"
 alias -s {pdf,PDF}="background $PDFVIEWER"
 
-# eternal terminal with clipper support
-alias dev="et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377"
+# fb shortcuts
+alias fbc='cd ~/fbsource/fbcode'
+alias cfgr='cd ~/configerator'
+alias xplat='cd ~/fbsource/xplat'
+alias www='cd ~/www'
+alias arcc="arc build && arc canary --ttl 7200"
+alias -s wbgs='tbgs'
+alias -s wbgf='tbgf'
+alias -s wbgr='tbgr'
+
+export fbcp="~/fbsource/fbcode"
+# alias shpaste="echo '$(pwd)\n >> $(!!)\n$($(!!))' | pastry"
+# alias -g G='| grep'
+# alias -g shpaste='| echo "~/path\n$(!!)\n" | pastry'
+
+function dfn {
+    prefix="data/users/abellows"
+    for n in $@
+    do
+        if [ -f "$n" ] ; then
+            full_path=$(realpath $n)
+            base_path=${full_path#*"$prefix/"}
+            repo=${base_path%%/*}
+            file_path=${base_path#*"$repo/"}
+
+            case $repo in
+                configerator)
+                    dfn_repo="CF"
+                    ;;
+                configerator-dsi)
+                    dfn_repo="CFDSI"
+                    ;;
+                fbsource)
+                    dfn_repo="FBS"
+                    ;;
+                opsfiles)
+                    dfn_repo="OPSFILES"
+                    ;;
+                *)
+                    echo "unknown repo '$n'"
+                    return 1
+                    ;;
+            esac
+        else
+            echo "'$n' - file does not exist"
+            return 1
+        fi
+        dfn_link="https://www.internalfb.com/intern/diffusion/$dfn_repo/browse/master/$file_path"
+        echo "$dfn_link"
+    done
+    return 0
+}
+
+function buck_targets {
+    for n in $@
+    do
+        if [ -f "$n/TARGETS" ] ; then
+            echo "---- Buck targets in $n: ----"
+            cat "$n/TARGETS" G "(?<=name\s=\s).*(?=,)" -P -C 2
+            echo "---- ---- ---- ---- ---- ----"
+        else
+            echo "'$n/TARGETS' - file does not exist"
+            return 1
+        fi
+    done
+    return 0
+}
+
+
+# added by fzf installer 10/8/19
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Powerlevel10k theme customizations
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# remote host stuff
+alias devvy='et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377'
+alias devvy2='et -x abellows@devvm422.atn0.facebook.com:8080 -r 8377:8377'
+
+# sexy stuff
+alias kbmdb='keybase chat send mdb0 '
+alias kbmdbr='keybase chat read mdb0 '

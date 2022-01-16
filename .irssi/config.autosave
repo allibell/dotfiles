@@ -3,11 +3,10 @@ servers = (
     address = "163.114.130.62";
     chatnet = "snafu";
     port = "6443";
-    use_tls = "yes";
-    tls_verify = "no";
     use_ssl = "yes";
+    ssl_verify = "no";
+    tls_verify = "no";
     autoconnect = "yes";
-    password = "abellows:DyrbRzxmShsfGgzk";
   }
 );
 settings = {
