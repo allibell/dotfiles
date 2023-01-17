@@ -127,3 +127,6 @@ EMSDK_QUIET=1 source "/Users/allibell/dev/emsdk/emsdk_env.sh"
 # llvm/clang
 export CC=/opt/homebrew/opt/llvm/bin/clang
 export AR=/opt/homebrew/opt/llvm/bin/llvm-ar
+
+# for gnu grep
+export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
