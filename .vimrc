@@ -154,9 +154,17 @@ let g:airline_mode_map = {
 " diff coloring (esp. fugitive)
 " call s:h("diffAdded", {"fg": s:green })
 " call s:h("diffRemoved", { "fg": s:red })
-hi DiffAdd guifg=NONE ctermfg=NONE guibg=#4acf55 ctermbg=002 gui=NONE cterm=NONE
-hi DiffChange guifg=NONE ctermfg=NONE guibg=#d3305e ctermbg=005 gui=NONE cterm=NONE
-hi DiffDelete guifg=NONE ctermfg=NONE guibg=#c92d2a ctermbg=009 gui=NONE cterm=NONE
+"
+" This is before Warp
+" hi DiffAdd guifg=NONE ctermfg=NONE guibg=#4acf55 ctermbg=002 gui=NONE cterm=NONE
+" hi DiffChange guifg=NONE ctermfg=NONE guibg=#d3305e ctermbg=005 gui=NONE cterm=NONE
+" hi DiffDelete guifg=NONE ctermfg=NONE guibg=#c92d2a ctermbg=009 gui=NONE cterm=NONE
+" hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
+"
+" This is after Warp
+hi DiffAdd guifg=NONE ctermfg=NONE guibg=NONE  ctermbg=002 gui=NONE cterm=NONE
+hi DiffChange guifg=NONE ctermfg=NONE guibg=NONE  ctermbg=005 gui=NONE cterm=NONE
+hi DiffDelete guifg=NONE ctermfg=NONE guibg=NONE  ctermbg=009 gui=NONE cterm=NONE
 hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
 
 " youCompleteMe

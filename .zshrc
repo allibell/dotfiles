@@ -130,3 +130,9 @@ export AR=/opt/homebrew/opt/llvm/bin/llvm-ar
 
 # for gnu grep
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+
+# Work around Warp terminal issues
+# https://github.com/warpdotdev/Warp/issues/936
+if [[ "$WARP_USE_SSH_WRAPPER" == "" ]] ; then
+    RPROMPT=`echo -ne "%{\033[A%}%B[%{\033[${PROMPT_USER_COLOR:-1;33}m%}%n%{\033[0m%}%B@%{\033[${PROMPT_HOST_COLOR:-1;33}m%}$PROMPT_HOSTNAME%b%B][%{\033[1;32m%}%T%b%B]%{\033[B%}"`
+fi
