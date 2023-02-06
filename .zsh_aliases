@@ -24,6 +24,7 @@ alias gls='git log --format=prettyshort'
 alias gl='git log'
 alias gs='git status'
 alias gsh='git show'
+alias gca='git commit -a -m'
 
 alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
@@ -115,3 +116,6 @@ alias -s {pdf,PDF}="background $PDFVIEWER"
 
 # eternal terminal with clipper support
 alias dev="et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377"
+
+# make pip easy (ugh)
+alias pip=pip3
