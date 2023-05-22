@@ -1,9 +1,22 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+##### WHAT YOU WANT TO DISABLE FOR WARP - BELOW
+#
+    # POWERLEVEL10K
+    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+    # Initialization code that may require console input (password prompts, [y/n]
+    # confirmations, etc.) must go above this block; everything else may go below.
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+
+    # Powerlevel10k theme customizations
+    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
 fi
+
 
 #################
 # Antigen
@@ -103,10 +116,6 @@ function extract {
 # added by fzf installer 10/8/19
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Powerlevel10k theme customizations
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
 # added for antigen
 source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -122,7 +131,7 @@ export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
 # emscripten
-EMSDK_QUIET=1 source "/Users/allibell/dev/emsdk/emsdk_env.sh"
+# EMSDK_QUIET=1 source "/Users/allibell/dev/emsdk/emsdk_env.sh"
 
 # llvm/clang
 export CC=/opt/homebrew/opt/llvm/bin/clang
@@ -136,3 +145,23 @@ export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 if [[ "$WARP_USE_SSH_WRAPPER" == "" ]] ; then
     RPROMPT=`echo -ne "%{\033[A%}%B[%{\033[${PROMPT_USER_COLOR:-1;33}m%}%n%{\033[0m%}%B@%{\033[${PROMPT_HOST_COLOR:-1;33}m%}$PROMPT_HOSTNAME%b%B][%{\033[1;32m%}%T%b%B]%{\033[B%}"`
 fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/allibell/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/allibell/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/allibell/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/allibell/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /Users/allibell/dev/menubar/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/allibell/dev/menubar/node_modules/tabtab/.completions/electron-forge.zsh
