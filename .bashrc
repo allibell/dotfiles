@@ -229,3 +229,6 @@ alias irssimux=irssi_in_tmux
 # added by allison 9/10/19 for dotfiles repo
 alias config='/usr/bin/git --git-dir=/home/allison/.cfg/ --work-tree=/home/allison'
 . "$HOME/.cargo/env"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

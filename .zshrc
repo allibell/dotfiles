@@ -76,6 +76,9 @@ if [ -h "$HOME/local/bin/vim" ]; then
     alias vim="$HOME/local/bin/vim"
 fi
 
+# rsync derp (working on matchmaker)
+alias rsync=/opt/homebrew/bin/rsync/
+
 # added by allison 5/24/19 for universal extraction
 function extract {
     if [ -z "$1" ]; then
@@ -125,6 +128,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
+
+# ruby lol
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
 # chromium for m1
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 # export PUPPETEER_SKIP_DOWNLOAD=true
@@ -137,6 +144,10 @@ export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 export CC=/opt/homebrew/opt/llvm/bin/clang
 export AR=/opt/homebrew/opt/llvm/bin/llvm-ar
 
+# add homebrew-installed paths (added to fix pip installs)
+# jk doesn't seem to work (using module.com)
+# export LDFLAGS=-L/opt/homebrew/lib/
+
 # for gnu grep
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 
@@ -147,21 +158,31 @@ if [[ "$WARP_USE_SSH_WRAPPER" == "" ]] ; then
 fi
 
 # >>> conda initialize >>>
+# RIP conda
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/allibell/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/allibell/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/allibell/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/allibell/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/Users/allibell/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/allibell/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/allibell/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/allibell/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /Users/allibell/dev/menubar/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/allibell/dev/menubar/node_modules/tabtab/.completions/electron-forge.zsh
+
+# SKETCHY PYTHON
+alias python=python3
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Add yarn global binaries
+export PATH="$PATH:/opt/homebrew/bin"
