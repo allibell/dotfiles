@@ -25,6 +25,7 @@ alias gl='git log'
 alias gs='git status'
 alias gsh='git show'
 alias gca='git commit -a -m'
+alias gc='git commit -m'
 
 alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
@@ -119,3 +120,29 @@ alias dev="et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377"
 
 # make pip easy (ugh)
 alias pip=pip3
+
+
+# log to LOG.txt in obsidian
+logit() {
+  local file_path="/Users/allibell/notes/obsidian/tmp/null/LOG.txt.md"
+
+  # Ensure the file exists
+  touch "$file_path"
+
+  # Get the current timestamp in the format [MM-DD-Day-YYYY HH:MM AM/PM]
+  local timestamp=$(date +"[%m-%d-%A-%Y %I:%M %p]")
+
+  # Text to be inserted (passed as a command parameter)
+  local text_to_insert="$*"
+
+  # Combine the timestamp with the text, using backticks for inline code in markdown
+  local full_text="\`$timestamp\` $text_to_insert"
+
+  # Use sed to insert the text into the third line of the file
+  # Use a backslash followed by a newline to correctly handle newlines in sed
+  sed -i '' "3i\\
+$full_text\\
+
+" "$file_path"
+}
+

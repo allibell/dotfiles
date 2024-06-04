@@ -1,3 +1,5 @@
+# homebrew rox
+export PATH="/opt/homebrew/bin:$PATH"
 
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
 ##### WHAT YOU WANT TO DISABLE FOR WARP - BELOW
@@ -158,20 +160,37 @@ if [[ "$WARP_USE_SSH_WRAPPER" == "" ]] ; then
 fi
 
 # >>> conda initialize >>>
-# RIP conda
 # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/allibell/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/Users/allibell/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/allibell/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/Users/allibell/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
+__conda_setup="$('/Users/allibell/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/allibell/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/allibell/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$PATH:/Users/allibell/miniconda3/bin"
+    fi
+fi
+unset __conda_setup
 # <<< conda initialize <<<
+#
+# Fix conda/brew squabbling
+# Deactivates conda before running brew. 
+# Re-activates conda if it was active upon completion.
+brew() {
+    local -a conda_envs
+    while [ "$CONDA_SHLVL" -gt 0  ]; do
+        conda_envs=("$CONDA_DEFAULT_ENV" $conda_envs)
+        conda deactivate
+    done
+    command brew $@
+    local brew_status=$?
+    for env in $conda_envs; do
+        conda activate "$env"
+    done
+    unset env
+    return "$brew_status"
+}
 
 
 # tabtab source for electron-forge package
@@ -184,5 +203,3 @@ alias python=python3
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# Add yarn global binaries
-export PATH="$PATH:/opt/homebrew/bin"
