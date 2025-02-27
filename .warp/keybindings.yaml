@@ -1,0 +1,24 @@
+---
+"pane_group:navigate_up": ctrl-k
+"editor_view:backspace": none
+"input:search_command_history": ctrl-r
+"editor_view:cut_all_right": none
+"pane_group:resize_right": ctrl-shift-cmd-right
+"pane_group:resize_down": ctrl-shift-cmd-down
+"editor_view:insert_newline": ctrl-shift-enter
+"ai_assistant_panel:reset_context": ctrl-shift-cmd-A
+"pane_group:navigate_left": ctrl-h
+"workspace:rename_active_tab": ctrl-cmd-n
+"input:clear_screen": shift-cmd-backspace
+"workspace:show_command_search": ctrl-shift-R
+"pane_group:resize_up": ctrl-shift-cmd-up
+"input:toggle_workflows": ctrl-shift-cmd-R
+"pane_group:add_right": "ctrl-\\"
+"workspace:toggle_ai_assistant": ctrl-shift-A
+"pane_group:add_down": ctrl--
+"pane_group:resize_left": ctrl-shift-cmd-left
+"pane_group:navigate_right": ctrl-l
+"terminal:ask_ai_assistant": ctrl-a
+"editor:select_to_line_start": ctrl-shift-)
+"editor_view:move_to_line_start": ctrl-0
+"pane_group:navigate_down": ctrl-j
