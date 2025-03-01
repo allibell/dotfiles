@@ -1,0 +1,162 @@
+{
+  "window.autoDetectColorScheme": true,
+  "workbench.colorCustomizations": {
+    "[Solarized Light]": {
+      "editor.background": "#FFFEF4"
+    },
+    "[papercolor-vscode-light]": {
+      "activityBar.background": "#005f87",
+      "statusBar.background": "#005f87"
+    }
+  },
+  "editor.tokenColorCustomizations": {
+    "[Challenger Deep]": {
+      "textMateRules": [
+        {
+          "scope": "keyword",
+          "settings": {
+            "foreground": "#aaffe4"
+          }
+        },
+        {
+          "scope": ["variable", "variable.other.constant"],
+          "settings": {
+            "foreground": "#6fc3ea" // Use the blue color for variables
+          }
+        },
+        {
+          "scope": ["variable.other"],
+          "settings": {
+            "foreground": "#cbe3e7" // Use 'normal' color for variable references, functions
+          }
+        },
+        {
+          "scope": [
+            "string",
+            "string.quoted",
+            "string.quoted.single",
+            "string.quoted.double",
+            "string.template",
+            "punctuation.definition.string"
+          ],
+          "settings": {
+            "foreground": "#aaffe4" // Use the cyan color for strings
+          }
+        },
+        {
+          "scope": [
+            "support.class",
+            "support.constant",
+            "support.variable",
+            "support.type.property-name",
+            "entity.other.attribute-name",
+            "meta.object-literal.key",
+            "meta.object.member",
+            "entity.name.type.property-name",
+            "variable.other.property",
+            "meta.property.object",
+            "meta.property.class",
+            "meta.property.instance",
+            "meta.property.static",
+            "meta.property"
+          ],
+          "settings": {
+            "foreground": "#6fc3ea" // Use the blue color for properties, etc.
+          }
+        },
+        {
+          "scope": ["support.function", "entity.name.function"],
+          "settings": {
+            "foreground": "#65b2ff",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": [
+            "support.type",
+            "constant.language.null",
+            "constant.language.undefined",
+            "constant.language.boolean.true",
+            "constant.language.boolean.false",
+            "constant.numeric"
+          ],
+          "settings": {
+            "foreground": "#c991e1" // Use the purple color for types, null, undefined, true, false
+          }
+        },
+        {
+          "scope": [
+            "punctuation.definition.parameters",
+            "punctuation.definition.block",
+            "punctuation.definition.brackets",
+            "punctuation.definition.array",
+            "punctuation.definition.arguments",
+            "punctuation.definition.template-expression",
+            "punctuation.definition.typeparameters"
+          ],
+          "settings": {
+            "foreground": "#6fc3ea" // Use the blue color for punctuation
+          }
+        },
+        {
+          "scope": ["entity.other.attribute-name"],
+          "settings": {
+            "foreground": "#6fc3ea" // Use the blue color for JSX attributes
+          }
+        }
+      ]
+    }
+  },
+  "workbench.preferredLightColorTheme": "papercolor-vscode-light",
+  "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
+  "workbench.preferredHighContrastColorTheme": "Ayu Dark",
+  "editor.inlineSuggest.enabled": true,
+  "inlineChat.showDiff": false,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "none",
+  "django.snippets.exclude": ["cms", "wagtail"],
+  "files.associations": {
+    "**/templates/*.html": "django-html"
+  },
+  "terminal.integrated.inheritEnv": false,
+  "workbench.preferredDarkColorTheme": "Challenger Deep",
+  "workbench.colorTheme": "Challenger Deep",
+  "cmake.configureOnOpen": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "git-autoconfig.configList": [{}],
+  "git-autoconfig.ignoreRootList": [
+    "/Users/allibell/dev/tmp/defense-tech-hackathon.com"
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+    "Cargo.toml": "Cargo.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask"
+  ]
+}
