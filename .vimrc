@@ -155,3 +155,60 @@ nnoremap <C-l> <C-W>l
 
 " FZF integration (if installed)
 set rtp+=/opt/homebrew/opt/fzf
+
+" augroup MyRustBold
+"   autocmd!
+"   autocmd FileType rust highlight rustKeyword cterm=bold gui=bold
+"   autocmd FileType rust highlight rustIdentifier gui=bold guifg=#005faf cterm=bold ctermfg=31
+"   autocmd FileType rust highlight rustType cterm=bold gui=bold
+"   autocmd FileType rust highlight rustLifetime cterm=bold gui=bold
+"   autocmd FileType rust highlight rustAttribute cterm=bold gui=bold
+" augroup END
+"
+"
+"
+
+augroup MyRustColors
+  autocmd!
+  " Base text
+  autocmd FileType rust highlight Normal       gui=none guifg=#444444 cterm=none ctermfg=236
+  autocmd FileType rust highlight Comment      gui=italic guifg=#878787 cterm=italic ctermfg=102
+  autocmd FileType rust highlight Constant     gui=bold guifg=#5f8700 cterm=bold ctermfg=64
+  autocmd FileType rust highlight rustDerive gui=bold guifg=#008700 cterm=bold ctermfg=28
+  autocmd FileType rust highlight rustDeriveTrait gui=bold guifg=#008700 cterm=bold ctermfg=28
+
+  " Keywords and control flow (blue)
+  autocmd FileType rust highlight rustKeyword       gui=bold guifg=#0087af cterm=bold ctermfg=31
+  autocmd FileType rust highlight rustConditional   gui=bold guifg=#af0000 cterm=bold ctermfg=124
+  autocmd FileType rust highlight rustRepeat        gui=bold guifg=#af0000 cterm=bold ctermfg=124
+  autocmd FileType rust highlight rustStorage       gui=bold guifg=#0087af cterm=bold ctermfg=31
+
+  " Types and identifiers
+  autocmd FileType rust highlight rustType          gui=bold guifg=#8700af cterm=bold ctermfg=91
+  autocmd FileType rust highlight rustTrait         gui=bold guifg=#8700af cterm=bold ctermfg=91
+  autocmd FileType rust highlight rustIdentifier    gui=bold guifg=#0087af cterm=bold ctermfg=31
+
+  " Functions and macros
+  autocmd FileType rust highlight rustFunction      gui=bold guifg=#d75f00 cterm=bold ctermfg=166
+  autocmd FileType rust highlight rustMacro         gui=bold guifg=#d75f00 cterm=bold ctermfg=166
+autocmd FileType rust highlight rustAssert        gui=bold guifg=#008700 cterm=bold ctermfg=28
+
+  " Attributes & lifetimes
+  autocmd FileType rust highlight rustAttribute     gui=bold guifg=#008700 cterm=bold ctermfg=28
+  autocmd FileType rust highlight rustLifetime      gui=bold guifg=#5f8700 cterm=bold ctermfg=64
+augroup END
+
+
+" This Vim mapping inserts a timestamp when you press Ctrl+T in insert mode.
+" Specifically:
+"
+" imap <C-t> creates a mapping that works in insert mode when you press Ctrl+T
+" <C-R>= allows you to evaluate a Vim expression and insert the result
+" strftime("[%m-%d-%A-%Y %I:%M %p]") formats the current time in the pattern:
+" [month-day-dayofweek-year hour:minute AM/PM]
+"
+" For example, pressing Ctrl+T while in insert mode would insert something
+" like:
+" [04-20-Thursday-2023 02:30 PM
+imap <C-t> <C-R>=strftime("`[%m-%d-%A-%Y %I:%M %p]`")<CR>
+
