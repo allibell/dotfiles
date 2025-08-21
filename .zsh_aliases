@@ -117,9 +117,6 @@ alias -s {jpg,jpeg,png,gif,mng,tiff,tif,xpm}="background $XIVIEWER"
 alias -s {ape,avi,flv,m4a,mkv,mov,mp3,mp4,mpeg,mpg,ogg,ogm,rm,wav,webm}="background $VIDVIEWER"
 alias -s {pdf,PDF}="background $PDFVIEWER"
 
-# eternal terminal with clipper support
-alias dev="et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377"
-
 # make pip easy (ugh)
 alias pip=pip3
 
