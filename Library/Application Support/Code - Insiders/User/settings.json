@@ -92,7 +92,8 @@
   "python.formatting.provider": "none",
   "django.snippets.exclude": ["cms", "wagtail"],
   "files.associations": {
-    "**/templates/*.html": "django-html"
+    "**/templates/*.html": "django-html",
+    "*.cpp": "aspnetcorerazor"
   },
   "terminal.integrated.inheritEnv": false,
   "workbench.preferredDarkColorTheme": "Challenger Deep",
@@ -132,5 +133,11 @@
   "cmake.pinnedCommands": [
     "workbench.action.tasks.configureTaskRunner",
     "workbench.action.tasks.runTask"
-  ]
+  ],
+  "makefile.configureOnOpen": true,
+  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+  "chat.tools.terminal.autoApprove": {
+    "cargo check": true,
+    "cargo test": true
+  }
 }
