@@ -22,3 +22,9 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 export TERM=xterm-256color
 
+
+# Created by `pipx` on 2025-06-12 04:15:45
+export PATH="$PATH:/Users/allibell/.local/bin"
+export PATH="$HOME/src/depot_tools:$PATH"
+export PATH="$HOME/chromium/src/depot_tools:$PATH"
+export PATH="$HOME/src/depot_tools:$PATH"

@@ -26,6 +26,8 @@ alias gs='git status'
 alias gsh='git show'
 alias gca='git commit -a -m'
 alias gc='git commit -m'
+alias gp='git push'
+alias gpl='git pull'
 
 alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
@@ -122,9 +124,12 @@ alias dev="et -x abellows@abellows.sb.facebook.com:8080 -r 8377:8377"
 alias pip=pip3
 
 
+### OBSIDIAN ###
+
+MONONOTE_PATH="/Users/allibell/notes/obsidian/mononote.md"
 # log to LOG.txt in obsidian
 logit() {
-  local file_path="/Users/allibell/notes/obsidian/tmp/null/LOG.txt.md"
+  local file_path="$MONONOTE_PATH"
 
   # Ensure the file exists
   touch "$file_path"
@@ -148,4 +153,5 @@ $text_to_insert\\
 $full_text
 " "$file_path"
 }
-
+# simply open mononote in vim
+alias note='vim "$MONONOTE_PATH"'
