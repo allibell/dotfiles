@@ -212,3 +212,52 @@ augroup END
 " [04-20-Thursday-2023 02:30 PM
 imap <C-t> <C-R>=strftime("`[%m-%d-%A-%Y %I:%M %p]`")<CR>
 
+" Toggle markdown checkbox [ ] <-> [x] for current line or visual selection
+function! s:ToggleCheckboxRange(startline, endline) abort
+    let l:lines = getline(a:startline, a:endline)
+    for i in range(len(l:lines))
+        let l = l:lines[i]
+        if l =~# '\v(^\s*([*+-]|\d+\.)\s*)\zs\[\s\]'
+            let l:lines[i] = substitute(l, '\v(^\s*([*+-]|\d+\.)\s*)\zs\[\s\]', '[x]', '')
+        elseif l =~# '\v(^\s*([*+-]|\d+\.)\s*)\zs\[x\]'
+            let l:lines[i] = substitute(l, '\v(^\s*([*+-]|\d+\.)\s*)\zs\[x\]', '[ ]', '')
+        elseif l =~# '\v\[\s\]'
+            let l:lines[i] = substitute(l, '\v\[\s\]', '[x]', '')
+        elseif l =~# '\v\[x\]'
+            let l:lines[i] = substitute(l, '\v\[x\]', '[ ]', '')
+        endif
+    endfor
+    call setline(a:startline, l:lines)
+endfunction
+
+" Wrapper callable from mappings
+function! ToggleCheckboxWrapper(...) abort
+    if a:0 == 2
+        call s:ToggleCheckboxRange(a:1, a:2)
+    else
+        let lnum = line('.')
+        call s:ToggleCheckboxRange(lnum, lnum)
+    endif
+endfunction
+
+" --- Markdown checkbox mappings: define mappings from a function (robust) ---
+function! s:SetupMarkdownCheckboxes() abort
+  " normal/visual toggle (buffer-local)
+  nnoremap <buffer> <nowait> <silent> ,c :call ToggleCheckboxWrapper()<CR>
+  vnoremap <buffer> <nowait> <silent> ,c <Esc>:call ToggleCheckboxWrapper(line("'<"), line("'>"))<CR>
+
+  " insert helpers
+  " make <C-b> use <C-o>I to jump to first non-blank for a single command then insert
+  " no more iabbrev >:(
+  inoremap <buffer> <nowait> <C-b> <C-o>I- [ ] 
+
+  " normal-mode insert helpers
+  nnoremap <buffer> <silent> ,i ^i- [ ] 
+  nnoremap <buffer> <silent> ,I o- [ ] 
+endfunction
+
+augroup MarkdownCheckboxes
+  autocmd!
+  autocmd FileType markdown call s:SetupMarkdownCheckboxes()
+augroup END
+
