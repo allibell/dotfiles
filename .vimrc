@@ -35,7 +35,7 @@ set fileformats=unix,dos,mac
 set iskeyword+=_,$,@,%,#
 
 " Enable truecolor support and syntax highlighting
-" set termguicolors
+set termguicolors
 syntax enable
 
 " Set leader key
@@ -196,6 +196,52 @@ autocmd FileType rust highlight rustAssert        gui=bold guifg=#008700 cterm=b
   " Attributes & lifetimes
   autocmd FileType rust highlight rustAttribute     gui=bold guifg=#008700 cterm=bold ctermfg=28
   autocmd FileType rust highlight rustLifetime      gui=bold guifg=#5f8700 cterm=bold ctermfg=64
+      " Dark-mode palette (so colors pop on dark terminals)
+"   function! s:ApplyRustColors(bg) abort
+"     if a:bg ==# 'dark'
+"       highlight Normal       gui=none   guifg=#dcdcdc cterm=none   ctermfg=252
+"       highlight Comment      gui=italic guifg=#7f9f9f cterm=italic ctermfg=103
+"       highlight Constant     gui=bold   guifg=#8be250 cterm=bold   ctermfg=114
+"       highlight rustDerive   gui=bold   guifg=#8be250 cterm=bold   ctermfg=114
+"       highlight rustDeriveTrait gui=bold guifg=#8be250 cterm=bold ctermfg=114
+"       highlight rustKeyword  gui=bold   guifg=#66d9ef cterm=bold   ctermfg=81
+"       highlight rustConditional gui=bold guifg=#f07178 cterm=bold ctermfg=167
+"       highlight rustRepeat   gui=bold   guifg=#f07178 cterm=bold   ctermfg=167
+"       highlight rustStorage  gui=bold   guifg=#66d9ef cterm=bold   ctermfg=81
+"       highlight rustType     gui=bold   guifg=#b294bb cterm=bold   ctermfg=139
+"       highlight rustTrait    gui=bold   guifg=#b294bb cterm=bold   ctermfg=139
+"       highlight rustIdentifier gui=bold guifg=#66d9ef cterm=bold   ctermfg=81
+"       highlight rustFunction gui=bold   guifg=#f0c674 cterm=bold   ctermfg=179
+"       highlight rustMacro    gui=bold   guifg=#f0c674 cterm=bold   ctermfg=179
+"       highlight rustAssert   gui=bold   guifg=#8be250 cterm=bold   ctermfg=114
+"       highlight rustAttribute gui=bold  guifg=#b5bd68 cterm=bold   ctermfg=143
+"       highlight rustLifetime gui=bold   guifg=#b5bd68 cterm=bold   ctermfg=143
+"     else
+"       " Light-mode palette (muted for light backgrounds)
+"       highlight Normal       gui=none   guifg=#444444 cterm=none   ctermfg=236
+"       highlight Comment      gui=italic guifg=#878787 cterm=italic ctermfg=102
+"       highlight Constant     gui=bold   guifg=#5f8700 cterm=bold   ctermfg=64
+"       highlight rustDerive   gui=bold   guifg=#008700 cterm=bold   ctermfg=28
+"       highlight rustDeriveTrait gui=bold guifg=#008700 cterm=bold   ctermfg=28
+"       highlight rustKeyword  gui=bold   guifg=#0087af cterm=bold   ctermfg=31
+"       highlight rustConditional gui=bold guifg=#af0000 cterm=bold   ctermfg=124
+"       highlight rustRepeat   gui=bold   guifg=#af0000 cterm=bold   ctermfg=124
+"       highlight rustStorage  gui=bold   guifg=#0087af cterm=bold   ctermfg=31
+"       highlight rustType     gui=bold   guifg=#8700af cterm=bold   ctermfg=91
+"       highlight rustTrait    gui=bold   guifg=#8700af cterm=bold   ctermfg=91
+"       highlight rustIdentifier gui=bold guifg=#0087af cterm=bold   ctermfg=31
+"       highlight rustFunction gui=bold   guifg=#d75f00 cterm=bold   ctermfg=166
+"       highlight rustMacro    gui=bold   guifg=#d75f00 cterm=bold   ctermfg=166
+"       highlight rustAssert   gui=bold   guifg=#008700 cterm=bold   ctermfg=28
+"       highlight rustAttribute gui=bold  guifg=#008700 cterm=bold   ctermfg=28
+"       highlight rustLifetime gui=bold   guifg=#5f8700 cterm=bold   ctermfg=64
+"     endif
+"   endfunction
+
+"   " Apply when a rust buffer opens
+"   autocmd FileType rust call s:ApplyRustColors(&background)
+"   " Reapply when background option changes (toggle light/dark)
+"   autocmd OptionSet background call s:ApplyRustColors(&background)
 augroup END
 
 
@@ -261,3 +307,18 @@ augroup MarkdownCheckboxes
   autocmd FileType markdown call s:SetupMarkdownCheckboxes()
 augroup END
 
+"
+" " Function to insert 20 blank lines
+" function! InsertBlankLines()
+"   for i in range(20)
+"     call append(line('.'), '')
+"   endfor
+" endfunction
+"
+function! InsertBlankLines()
+  call append(line('.'), repeat([''], 20))
+endfunction
+
+" Map Ctrl-] in normal mode to call the function
+nnoremap <C-]> :call InsertBlankLines()<CR>
+inoremap <C-]> <Esc>:call InsertBlankLines()<CR>a
