@@ -35,3 +35,12 @@ export PATH="$PATH:/Users/allibell/.local/bin"
 export PATH="$HOME/src/depot_tools:$PATH"
 export PATH="$HOME/chromium/src/depot_tools:$PATH"
 export PATH="$HOME/src/depot_tools:$PATH"
+
+# Open Zed on the given path(s), or current directory if none
+zed() {
+  if [[ $# -eq 0 ]]; then
+    open -a "Zed" .
+  else
+    open -a "Zed" "$@"
+  fi
+}
