@@ -139,5 +139,6 @@
   "chat.tools.terminal.autoApprove": {
     "cargo check": true,
     "cargo test": true
-  }
+  },
+  "github.copilot.nextEditSuggestions.enabled": true
 }
