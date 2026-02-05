@@ -92,12 +92,10 @@
   "python.formatting.provider": "none",
   "django.snippets.exclude": ["cms", "wagtail"],
   "files.associations": {
-    "**/templates/*.html": "django-html",
-    "*.cpp": "aspnetcorerazor"
+    "**/templates/*.html": "django-html"
   },
   "terminal.integrated.inheritEnv": false,
-  "workbench.preferredDarkColorTheme": "Challenger Deep",
-  "workbench.colorTheme": "Challenger Deep",
+  "workbench.colorTheme": "papercolor-vscode-light",
   "cmake.configureOnOpen": true,
   "github.copilot.enable": {
     "*": true,
@@ -140,5 +138,10 @@
     "cargo check": true,
     "cargo test": true
   },
-  "github.copilot.nextEditSuggestions.enabled": true
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "workbench.preferredDarkColorTheme": "Challenger Deep",
+  "chat.tools.terminal.outputLocation": "chat",
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "[aspnetcorerazor]": {}
 }
