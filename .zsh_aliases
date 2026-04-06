@@ -28,6 +28,7 @@ alias gca='git commit -a -m'
 alias gc='git commit -m'
 alias gp='git push'
 alias gpl='git pull'
+alias gfpl='git fetch && git pull'
 
 alias zshrc='${=EDITOR} ~/.zshrc' # Quick access to the ~/.zshrc file
 
@@ -152,3 +153,6 @@ $full_text
 }
 # simply open mononote in vim
 alias note='vim "$MONONOTE_PATH"'
+
+alias els='eza --group-directories-first'
+alias ell='eza -lah --group-directories-first'

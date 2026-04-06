@@ -81,7 +81,6 @@
       ]
     }
   },
-  "workbench.preferredLightColorTheme": "papercolor-vscode-light",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredHighContrastColorTheme": "Ayu Dark",
   "editor.inlineSuggest.enabled": true,
@@ -143,5 +142,7 @@
   "chat.tools.terminal.outputLocation": "chat",
   "git.autofetch": true,
   "git.confirmSync": false,
-  "[aspnetcorerazor]": {}
+  "[aspnetcorerazor]": {},
+  "workbench.preferredLightColorTheme": "papercolor-vscode-light",
+  "window.systemColorTheme": "auto"
 }

@@ -3,14 +3,19 @@ if [ -z "$CURSOR_TRACE_ID" ]; then
     # For example, for Oh My Zsh:
     # source $ZSH/oh-my-zsh.sh
     #
-    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-    # Initialization code that may require console input (password prompts, [y/n]
-    # confirmations, etc.) must go above this block; everything else may go below.
-    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    if [[ -o interactive && ( "$TERM_PROGRAM" == "iTerm.app" || "$LC_TERMINAL" == "iTerm2" || -n "$ITERM_SESSION_ID" ) ]]; then
+        # Enable Powerlevel10k in iTerm2, including shells running inside tmux.
+        # Initialization code that may require console input (password prompts, [y/n]
+        # confirmations, etc.) must go above this block; everything else may go below.
+        if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+          source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+        fi
+        if [[ -r /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme ]]; then
+          source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+        fi
+        # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     fi
-    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
     export TERM=xterm-256color
 fi
@@ -76,3 +81,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# Colorize ls output on macOS (BSD ls)
+export CLICOLOR=1
+export LSCOLORS=exfxcxdxbxegedabagacad
+alias ls='ls -G'
