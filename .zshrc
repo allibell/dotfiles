@@ -4,6 +4,8 @@ if [ -z "$CURSOR_TRACE_ID" ]; then
     # source $ZSH/oh-my-zsh.sh
     #
     if [[ -o interactive && ( "$TERM_PROGRAM" == "iTerm.app" || "$LC_TERMINAL" == "iTerm2" || -n "$ITERM_SESSION_ID" ) ]]; then
+        # Use vi-style line editing in iTerm2 without affecting Warp.
+        set -o vi
         # Enable Powerlevel10k in iTerm2, including shells running inside tmux.
         # Initialization code that may require console input (password prompts, [y/n]
         # confirmations, etc.) must go above this block; everything else may go below.
@@ -86,3 +88,9 @@ unset __conda_setup
 export CLICOLOR=1
 export LSCOLORS=exfxcxdxbxegedabagacad
 alias ls='ls -G'
+
+# fzf shell integration
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+
+export EDITOR=vim
+export VISUAL=vim
