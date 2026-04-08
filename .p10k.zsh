@@ -167,7 +167,7 @@
   fi
 
   # Default background color.
-  typeset -g POWERLEVEL9K_BACKGROUND=240
+  typeset -g POWERLEVEL9K_BACKGROUND=
 
   # Separator between same-color segments on the left.
   typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%250F\u2502'
@@ -223,6 +223,8 @@
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=31
+  # Keep directory path background transparent instead of inheriting the dark global background.
+  typeset -g POWERLEVEL9K_DIR_BACKGROUND=
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
@@ -524,6 +526,7 @@
 
   # Status on success. No content, just an icon. No need to show it if prompt_char is enabled as
   # it will signify success by turning green.
+  typeset -g POWERLEVEL9K_STATUS_{OK,OK_PIPE,ERROR,ERROR_SIGNAL,ERROR_PIPE}_BACKGROUND=
   typeset -g POWERLEVEL9K_STATUS_OK=true
   typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=70
   typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION='✔'
@@ -558,6 +561,8 @@
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
   # Show this many fractional digits. Zero means round to seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
+  # Keep command duration background transparent on the right prompt.
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=
   # Execution time color.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=248
   # Duration format: 1d 2h 3m 4s.
@@ -945,6 +950,7 @@
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
+  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=37
   # Don't show Python version next to the virtual environment name.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
@@ -958,6 +964,7 @@
 
   #####################[ anaconda: conda environment (https://conda.io/) ]######################
   # Anaconda environment color.
+  typeset -g POWERLEVEL9K_ANACONDA_BACKGROUND=
   typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=37
 
   # Anaconda segment format. The following parameters are available within the expansion.
@@ -991,6 +998,7 @@
 
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
+  typeset -g POWERLEVEL9K_PYENV_BACKGROUND=
   typeset -g POWERLEVEL9K_PYENV_FOREGROUND=37
   # Hide python version if it doesn't come from one of these sources.
   typeset -g POWERLEVEL9K_PYENV_SOURCES=(shell local global)
